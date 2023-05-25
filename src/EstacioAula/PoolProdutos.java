@@ -1,3 +1,5 @@
+package EstacioAula;
+
 /**
  *
  * @author Prof Marlos M Corrêa
@@ -7,7 +9,7 @@ public final class PoolProdutos extends ContadorSinc {
     public PoolProdutos ( int qtdade_produtos ) {
         super (qtdade_produtos);
         if ( qtdade_produtos < 1 )
-            throw new IllegalArgumentException ( "Argumentos ilegais utilizados no construtor de PoolProdutos." );
+            throw new IllegalArgumentException ( "Argumentos ilegais utilizados no construtor de EstacioAula.PoolProdutos." );
     }
     public synchronized int retirarProdutos ( int nr_produtos ) {
         int aux = getContador ();

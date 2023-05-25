@@ -1,3 +1,5 @@
+package EstacioAula;
+
 import java.util.ArrayList;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.Semaphore;
@@ -58,8 +60,8 @@ public class Equipe extends Thread {
     }
     /**
      * Para cada empregador, se houver pacote disponível para empacotar, decrementa pool_pacotes, dispara uma
-     * thread (Empacotador) para realizar o trabalho de empacotamento. Do contrário, não faz nada.
-     * @return Se for possível retirar um pacote para cada (Empacotador), retorna true, caso contrário, retorna false.
+     * thread (EstacioAula.Empacotador) para realizar o trabalho de empacotamento. Do contrário, não faz nada.
+     * @return Se for possível retirar um pacote para cada (EstacioAula.Empacotador), retorna true, caso contrário, retorna false.
      */
     private boolean empacotar ( int nr_produtos ) {
         Thread thd;
@@ -72,19 +74,19 @@ public class Equipe extends Thread {
             for ( int i = 1 ; i <= thd_criadas ; i++ ) {
                 thd = new Thread ( empacotadores.get ( i - 1 ) );
                 thd.setPriority ( Thread.currentThread().getPriority() + 2 );
-                thd.start ( ); //Inicia a thread (Empacotador).
+                thd.start ( ); //Inicia a thread (EstacioAula.Empacotador).
             }
             liberarFitasDesnecessarias ( nr_produtos - thd_criadas ); //Devolve todas as fitas excedentes.
-            return bloquear ( ); //Bloqueia a thread (Equipe) até que os empacotadores terminem o trabalho.
+            return bloquear ( ); //Bloqueia a thread (EstacioAula.Equipe) até que os empacotadores terminem o trabalho.
         }
     }
     /**
-     * Realiza o bloqueio da thread até que todas as threads (Empacotador) tenham finalizado
+     * Realiza o bloqueio da thread até que todas as threads (EstacioAula.Empacotador) tenham finalizado
      * @return boolean
      */
     private boolean bloquear ( ) {
         try {
-            latch.await(); //Bloqueia a thread (Equipe) até que os empacotadores terminem o trabalho.
+            latch.await(); //Bloqueia a thread (EstacioAula.Equipe) até que os empacotadores terminem o trabalho.
             return true;
         } catch ( InterruptedException e ) {
             e.printStackTrace();
@@ -98,7 +100,7 @@ public class Equipe extends Thread {
         System.out.println ( " |- Empacotamentos da equipe: " + this.prod_empacotados_eqp.getContador() );
         System.out.println ( " |- Empacotamentos por integrante:" );
         empacotadores.forEach( (emp ) -> emp.listarEmpacotamentos ( ) );
-        System.out.println ( " |- Threads por objeto Empacotador:" );
+        System.out.println ( " |- Threads por objeto EstacioAula.Empacotador:" );
         empacotadores.forEach( (emp ) -> emp.listarIdThreads ( ) );
         System.out.println ( "/----------------------------------------/\n" );
     }

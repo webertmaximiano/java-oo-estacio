@@ -1,6 +1,5 @@
-//Importações
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.Semaphore;
+package EstacioAula;//Importações
+
 /**
  *
  * @author Prof Marlos M Corrêa
@@ -30,12 +29,12 @@ public class Empacotador implements Runnable {
     public void run() {
         try {
             synchronized ( lista_threads_id ) {
-                lista_threads_id = lista_threads_id + "[" + Thread.currentThread().getId() + "]"; //Constrói na instância de Empacotador uma lista com todas as threads que foram criadas.
+                lista_threads_id = lista_threads_id + "[" + Thread.currentThread().getId() + "]"; //Constrói na instância de EstacioAula.Empacotador uma lista com todas as threads que foram criadas.
             }
             System.out.println ( nome + " empacotando (" + System.currentTimeMillis() + ")" );
             Thread.sleep ( ( int ) ( Math.random ( ) * 899 + 100 ) ); //Coloca a thread para dormir por um período aleatório entre 100 e 999 milissegundos.
             System.out.println ( nome + " concluiu  (" + System.currentTimeMillis() + ")" );
-            empacotamentos.incrementar(); //Incrementa o contador de empacotamentos da instância de Empacotador.
+            empacotamentos.incrementar(); //Incrementa o contador de empacotamentos da instância de EstacioAula.Empacotador.
             equipe.liberarFita();
         } catch ( InterruptedException e ) {
             e.printStackTrace();

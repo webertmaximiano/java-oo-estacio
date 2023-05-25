@@ -1,3 +1,4 @@
+package EstacioAula;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -19,7 +20,7 @@ public class Empresa {
     //Métodos
     public Empresa ( int nr_fitas , int pool_empacotadores , int nr_max_equipes , int max_prod_empacotar ) throws InterruptedException {
         if ( ( nr_fitas < 1 ) || ( pool_empacotadores < 2 ) || ( nr_max_equipes < 1 ) || ( max_prod_empacotar < 1 ) )
-            throw new IllegalArgumentException ( "Argumentos ilegais utilizados no construtor de Empresa." );
+            throw new IllegalArgumentException ( "Argumentos ilegais utilizados no construtor de EstacioAula.Empresa." );
         else {
             this.pool_fita = new Semaphore ( nr_fitas );
             this.pool_empacotadores = pool_empacotadores;
@@ -32,7 +33,7 @@ public class Empresa {
             turno.forEach( ( eqp ) -> eqp.start ( ) ); //Inicia todas as threads.
             for ( Equipe eqp : turno ) //Faz o join com todas as threads de equipe.
                 try {
-                    eqp.join ( ); //A thread principal deve aguardar o fim de todas as threads Equipe para poder contabilizar os empacotamentos.
+                    eqp.join ( ); //A thread principal deve aguardar o fim de todas as threads EstacioAula.Equipe para poder contabilizar os empacotamentos.
                 } catch ( InterruptedException e ) {
                     e.printStackTrace();
                 }
